@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "description": "",
+  "name": "Wingo AI Predictor",
+  "description": "AI Wingo Predictor & Period Matcher for 92PKR, 92Jeeto, 92R, BJ Game, Daman, Tiranga, and 1KBet.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

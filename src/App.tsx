@@ -131,23 +131,26 @@ export default function App() {
         }),
       });
 
-      if (res.ok) {
-        const data: PredictionResult = await res.json();
-        
-        // Save prediction in store for period lock
-        const key = `${selectedPlatform}_${timeMode}_${targetPeriod}`;
-        setSavedPredictionsMap((prev) => {
-          const updated = { ...prev, [key]: data };
-          try {
-            localStorage.setItem('wingo_saved_predictions', JSON.stringify(updated));
-          } catch (e) {
-            console.warn('localStorage write error:', e);
-          }
-          return updated;
-        });
+      if (!res.ok) {
+        throw new Error(`Server returned status ${res.status}`);
       }
+
+      const data: PredictionResult = await res.json();
+        
+      // Save prediction in store for period lock
+      const key = `${selectedPlatform}_${timeMode}_${targetPeriod}`;
+      setSavedPredictionsMap((prev) => {
+        const updated = { ...prev, [key]: data };
+        try {
+          localStorage.setItem('wingo_saved_predictions', JSON.stringify(updated));
+        } catch (e) {
+          console.warn('localStorage write error:', e);
+        }
+        return updated;
+      });
     } catch (err) {
       console.error('Prediction request error:', err);
+      alert(`Prediction request failed: ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setIsPredicting(false);
     }

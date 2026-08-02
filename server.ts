@@ -257,7 +257,7 @@ Pattern: ${patternType}
 Provide a short 2-sentence explanation in clear Roman Urdu explaining why Period #${targetPeriod} is predicted to be ${sizeResult} and ${colorResult} color (Target #${predictedNumber}). Note that size and color are calculated independently based on server seed clock! Keep it high-tech and reassuring.`;
 
         const response = await geminiClient.models.generateContent({
-          model: "gemini-3.6-flash",
+          model: "gemini-2.5-flash",
           contents: prompt,
         });
 
